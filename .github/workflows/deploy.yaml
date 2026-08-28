@@ -1,0 +1,22 @@
+name: html application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: set up docker
+        run: |
+          docker compose up -d --build
+
+      - name: run tests
+        run: |
+          curl http://localhost:8080/
